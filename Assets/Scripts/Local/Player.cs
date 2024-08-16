@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public sealed class Player : PortalTraveller, IInteractor, IEnvironmentEntity
+public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
 {
     #region State
     /// <summary>
@@ -62,7 +62,7 @@ public sealed class Player : PortalTraveller, IInteractor, IEnvironmentEntity
     #endregion
     public event Action<InteractionContext> onInteract;
 
-    /*
+    
     public void Teleport(Transform transform)
     {
         Teleport(transform.position);
@@ -81,15 +81,8 @@ public sealed class Player : PortalTraveller, IInteractor, IEnvironmentEntity
             throw new NotImplementedException("Other types of movement were not implemented yet!");
         }
         Debug.Log($"Teleported to: {transform.position}");
-    }*/
-
-    public override void Teleport (Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot) {
-        transform.position = pos;
-        Vector3 eulerRot = rot.eulerAngles;
-        usedCamera.viewAngles = eulerRot;
-        usedRigidbody.velocity = toPortal.TransformVector (fromPortal.InverseTransformVector (usedRigidbody.velocity));
-        Physics.SyncTransforms ();
     }
+
     /// <summary>
     /// Updates current environment
     /// </summary>
