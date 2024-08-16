@@ -2,7 +2,7 @@ public interface IInteractable
 {
     public virtual InteractableHoverResponse GetHoverResponse(IInteractor interactor)
     {
-        return InteractableHoverResponse.Disabled;
+        return InteractableHoverResponse.None;
     }
     public virtual bool CanInteract(IInteractor interactor)
     {
@@ -17,10 +17,6 @@ public interface IInteractable
 public enum InteractableHoverResponse
 {
     None,
-    Disabled,
-    Talk,
-    Use,
-    Pick,
-    Open,
-    Close
+    Enable,
+    Disable,
 }
