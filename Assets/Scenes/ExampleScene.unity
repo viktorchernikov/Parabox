@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -455,6 +455,7 @@ GameObject:
   m_Component:
   - component: {fileID: 283755439}
   - component: {fileID: 283755438}
+  - component: {fileID: 283755440}
   m_Layer: 0
   m_Name: Portal A
   m_TagString: Untagged
@@ -496,6 +497,27 @@ Transform:
   - {fileID: 1072865095}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &283755440
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283755437}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.110401, y: 2.796359, z: 1.388608}
+  m_Center: {x: 0.060688496, y: 1.4069226, z: -0.008759975}
 --- !u!1 &502074872
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1274636432}
   - component: {fileID: 1274636431}
+  - component: {fileID: 1274636433}
   m_Layer: 0
   m_Name: Portal B
   m_TagString: Untagged
@@ -852,6 +875,27 @@ Transform:
   - {fileID: 2017109017}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1274636433
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274636430}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.0499997, y: 2.934219, z: 1}
+  m_Center: {x: -0.006496668, y: 1.3634539, z: 0}
 --- !u!1001 &1315228657
 PrefabInstance:
   m_ObjectHideFlags: 0
