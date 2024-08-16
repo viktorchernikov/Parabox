@@ -7,6 +7,8 @@ using UnityEngine;
 public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
 {
     #region State
+    public float currentScale { get; private set; } = 1;
+    public PlayerDimensions currentDimensions { get; private set; } = new PlayerDimensions() { height = 2f, radius = 0.4f };
     /// <summary>
     /// Player's body forward vector.
     /// </summary>
@@ -53,6 +55,7 @@ public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
     /// A reference to the rigidbody component used by the player.
     /// </summary>
     public Rigidbody usedRigidbody { get; private set; }
+    public CapsuleCollider usedCollider { get; private set; }
     #endregion
     #region Modules
     /// <summary>
@@ -60,7 +63,16 @@ public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
     /// </summary>
     public readonly List<PlayerModule> modules = new List<PlayerModule>();
     #endregion
+    #region Points
+    public Transform cameraAnchor => _cameraAnchor;
+    [Header("Points")]
+    [SerializeField] Transform _cameraAnchor;
+    #endregion
+    #region Constants
+    public readonly PlayerDimensions defaultDimensions = new PlayerDimensions() { height = 2f, radius = 0.4f};
+    #endregion
     public event Action<InteractionContext> onInteract;
+    public event Action<float, float, PlayerDimensions, PlayerDimensions> onScaleChange;
 
     
     public void Teleport(Transform transform)
@@ -82,7 +94,24 @@ public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
         }
         Debug.Log($"Teleported to: {transform.position}");
     }
+    public void SetScale(float newScale)
+    {
+        float oldScale = currentScale;
+        PlayerDimensions oldDimensions = currentDimensions;
 
+        currentScale = newScale;
+        PlayerDimensions newDimensions = new PlayerDimensions();
+        newDimensions.height = defaultDimensions.height * currentScale;
+        newDimensions.radius = defaultDimensions.radius * currentScale;
+        currentDimensions = newDimensions;
+
+        usedCollider.height = newDimensions.height;
+        usedCollider.radius = newDimensions.radius;
+        usedCollider.transform.localPosition = Vector3.up * newDimensions.height * 0.5f;
+        cameraAnchor.transform.localPosition = Vector3.up * newDimensions.height;
+
+        onScaleChange?.Invoke(oldScale, newScale, oldDimensions, newDimensions);
+    }
     /// <summary>
     /// Updates current environment
     /// </summary>
@@ -171,6 +200,7 @@ public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
     {
         usedRigidbody = GetComponent<Rigidbody>();
         usedCamera = GetComponentInChildren<PlayerCamera>();
+        usedCollider = GetComponentInChildren<CapsuleCollider>();
     }
     /// <summary>
     /// This is a method that helps with initializing each module attached to the player.
