@@ -113,6 +113,7 @@ public sealed class PlayerGroundMotor : PlayerMotor
     {
         IsGronded();
         MovePlayer();
+        CounterScaleGravity();
     }
 
     private void IsGronded() 
@@ -198,9 +199,14 @@ public sealed class PlayerGroundMotor : PlayerMotor
         moveDirection = parent.bodyForward * verticalInput + parent.bodyRight * horizontalInput;
 
         if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * parent.currentScale * 10f, ForceMode.Force);
         else
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * parent.currentScale * 10f * airMultiplier, ForceMode.Force);
+    }
+    private void CounterScaleGravity()
+    {
+        if (!grounded)
+            rb.AddForce(Physics.gravity * (parent.currentScale - 1f), ForceMode.Acceleration);
     }
 
     private void SpeedControl()
@@ -217,7 +223,7 @@ public sealed class PlayerGroundMotor : PlayerMotor
     private void Jump()
     {
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(transform.up * jumpForce * parent.currentScale, ForceMode.Impulse);
     }
 
     private void ResetJump()
