@@ -17,14 +17,15 @@ public class PauseMenuUI : MonoBehaviour
     [SerializeField] GameObject containerPauseUI;
     #endregion
 
-    void Start()
+    private void Start()
     {
         containerPauseUI.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             isPause = !isPause;
 
             if (!isPause)

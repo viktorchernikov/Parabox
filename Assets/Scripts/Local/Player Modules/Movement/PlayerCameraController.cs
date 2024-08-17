@@ -31,6 +31,11 @@ public class PlayerCameraController : PlayerModule
     }
     public override void OnLateUpdate(float deltaTime)
     {
+        if (PauseController.instance.isPaused)
+        {
+            return;
+        }
+
         Vector2 input = GetInput();
 
         viewAngles.y += input.x;
