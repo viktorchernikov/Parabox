@@ -45,7 +45,7 @@ public class Switch : MonoBehaviour, IInteractable
         if (isBusy)
             return InteractableHoverResponse.None;
         
-        return isActive ? InteractableHoverResponse.Disable : InteractableHoverResponse.Enable;
+        return isActive ? InteractableHoverResponse.Enable : InteractableHoverResponse.Disable;
     }
     public bool CanInteract(IInteractor interactor)
     {
