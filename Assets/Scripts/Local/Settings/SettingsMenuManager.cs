@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Palmmedia.ReportGenerator.Core;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
-using Unity.VisualScripting;
+using System;
 
 public class SettingsMenuManager : MonoBehaviour
 {
     public GameObject[] Categories;
+    int selectedCategory = 0;
     public Color selected;
     public Color notSelected;
 
@@ -26,29 +25,37 @@ public class SettingsMenuManager : MonoBehaviour
         int i = 0;
         foreach (GameObject f in Categories) {
             f.SetActive(i == categoryNum);
+            f.transform.parent.Find("Selected").GetComponent<Image>().color = i == categoryNum ? selected : notSelected;
             i++;
         }
+        selectedCategory = categoryNum;
     }
 
     public void SetQuality(int value) {
         PlayerSettings.SetQuality((PlayerSettings.Quality)value);
+        PlayerSettings.Save();
     }
 
     public void SetMasterVolume() {
         PlayerSettings.SetMasterVolume(MasterSlider.value);
+        PlayerSettings.Save();
     }
 
     public void SetMusicVolume() {
         PlayerSettings.SetMusicVolume(MusicSlider.value);
+        PlayerSettings.Save();
     }
 
     public void SetSfxVolume() {
-        PlayerSettings.SetMusicVolume(SfxSlider.value);
+        PlayerSettings.SetSfxVolume(SfxSlider.value);
+        PlayerSettings.Save();
     }
 
     public void SetSensitivity() {
         try { PlayerSettings.SetMouseSensitivity(new Vector2(int.Parse(mouseX.text), int.Parse(mouseY.text))); }
         catch {}
+
+        PlayerSettings.Save();
     }
 
     public void Save() {
@@ -59,14 +66,9 @@ public class SettingsMenuManager : MonoBehaviour
     bool showMenu = false;
     CursorLockMode prev;
 
-    void SceneChanged(Scene prevScene, Scene newScene) {
-        prev = Cursor.lockState;
-    }
-
     void Start() {
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(menu);
-        SceneManager.activeSceneChanged += SceneChanged;
     }
 
     private void Update() {
@@ -75,6 +77,7 @@ public class SettingsMenuManager : MonoBehaviour
 
         menu.SetActive(showMenu);
         if (showMenu) {
+            prev = Cursor.lockState;
             Cursor.lockState = CursorLockMode.None;
         }
         else {
