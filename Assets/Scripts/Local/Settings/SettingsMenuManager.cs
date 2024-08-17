@@ -63,7 +63,7 @@ public class SettingsMenuManager : MonoBehaviour
     }
 
 
-    bool showMenu = false;
+    public bool showMenu = false;
     CursorLockMode prev;
 
     void Start() {
@@ -73,15 +73,7 @@ public class SettingsMenuManager : MonoBehaviour
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) showMenu = !showMenu;
-        else return;
 
         menu.SetActive(showMenu);
-        if (showMenu) {
-            prev = Cursor.lockState;
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else {
-            Cursor.lockState = prev;
-        }
     }
 }

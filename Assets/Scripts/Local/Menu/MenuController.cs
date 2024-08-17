@@ -17,7 +17,7 @@ public class MenuController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !FindAnyObjectByType<SettingsMenuManager>().showMenu)
         {
             if (!PauseController.instance.isPaused)
                 PauseGame();
@@ -36,5 +36,9 @@ public class MenuController : MonoBehaviour
     {
         PauseController.instance.Unpause();
         pauseMenuUI.SetActive(false);
+    }
+
+    public void Settings() {
+        FindAnyObjectByType<SettingsMenuManager>().showMenu = true;
     }
 }
