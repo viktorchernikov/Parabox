@@ -127,7 +127,7 @@ public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
         usedCollider.height = newDimensions.height;
         usedCollider.radius = newDimensions.radius;
         usedCollider.transform.localPosition = Vector3.up * newDimensions.height * 0.5f;
-        cameraAnchor.transform.localPosition = Vector3.up * newDimensions.height;
+        cameraAnchor.transform.localPosition = (Vector3.up * 0.95f) * newDimensions.height;
 
         onScaleChange?.Invoke(oldScale, newScale, oldDimensions, newDimensions);
     }
@@ -220,6 +220,8 @@ public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
         usedRigidbody = GetComponent<Rigidbody>();
         usedCamera = GetComponentInChildren<PlayerCamera>();
         usedCollider = GetComponentInChildren<CapsuleCollider>();
+
+        usedCamera.Unparent();
     }
     /// <summary>
     /// This is a method that helps with initializing each module attached to the player.

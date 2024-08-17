@@ -15,3 +15,4 @@ MonoBehaviour:
   duration: 2.6
   sequence: {fileID: 919132149155446097, guid: f6e1aa565af97f448b599bac98354eb4, type: 3}
   animator: {fileID: 9100000, guid: a5ca11394ccc7664eb4afbb48acae90d, type: 2}
+  cameraStartViewAngles: {x: 10, y: 0, z: 0}

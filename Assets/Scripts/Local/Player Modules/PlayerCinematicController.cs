@@ -1,39 +1,57 @@
+using System;
 using System.Collections;
 using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class PlayerCinematicController : PlayerModule
 {
+    public bool isPlaying { get; private set; } = false;
     [Header("Cinematics")]
     [SerializeField] PlayerCinematicSeqauence wormJumpinCinematic;
     [SerializeField] PlayerCinematicSeqauence wormJumpoutCinematic;
     [Header("Tweaks")]
     [SerializeField] AnimationCurve adjustPosAndVeCurve;
 
+    public event Action onWormholeTeleport;
+
 
     private void Start()
     {
-        PlayWormholeJumpin(parent.usedRigidbody.position, 0);
+
     }
-    public void PlayWormholeJumpin(Vector3 startPlayerPos, float startPlayerYaw)
+    public void PlayWormholeJumpin(Wormbox box)
     {
-        StartCoroutine(WormboxSequence(startPlayerPos, startPlayerYaw));
+        StartCoroutine(WormboxSequence(box));
     }
 
     #region Sequences
-    IEnumerator WormboxSequence(Vector3 startPlayerPos, float startPlayerYaw)
+    IEnumerator WormboxSequence(Wormbox box)
     {
+        isPlaying = true;
         parent.SetDuringCinematic(true);
-        yield return PlaySequence(wormJumpinCinematic, startPlayerPos, Quaternion.identity);
-        yield return PlaySequence(wormJumpoutCinematic, startPlayerPos, Quaternion.identity, true);
+
+        Vector3 playerToBoxDir = box.sitPoint.position - parent.usedRigidbody.position;
+        Quaternion playerToBoxAng = Quaternion.LookRotation(playerToBoxDir) * Quaternion.Euler(wormJumpinCinematic.cameraStartViewAngles);
+        float playerToBoxYaw = playerToBoxAng.eulerAngles.y;
+        Vector3 playerToBoxPos = (Quaternion.Euler(0, playerToBoxYaw, 0) * Vector3.back * 3 * parent.currentScale) + box.sitPoint.position;
+        Vector3 cameraToBoxPos = playerToBoxPos + Vector3.up * parent.cameraAnchor.localPosition.y;
+
+        yield return AdjustCameraPositionAndViewAngles(cameraToBoxPos, playerToBoxAng.eulerAngles, 1f, 30f);
+        
+        yield return PlaySequence(wormJumpinCinematic, playerToBoxPos, Quaternion.identity * Quaternion.Euler(0, playerToBoxYaw, 0), Vector3.one * parent.currentScale);
+        onWormholeTeleport?.Invoke();
+        yield return PlaySequence(wormJumpoutCinematic, box.linkedBox.sitPoint.position, Quaternion.identity * Quaternion.Euler(0, box.linkedBox.transform.eulerAngles.y, 0), Vector3.one * box.linkedBox.playerScale, true);
+
         parent.SetDuringCinematic(false);
+        isPlaying = false;
     }
     #endregion
 
     #region Helpers
-    IEnumerator PlaySequence(PlayerCinematicSeqauence cinematic, Vector3 pos, Quaternion rot, bool teleportEndPlayer = false)
+    IEnumerator PlaySequence(PlayerCinematicSeqauence cinematic, Vector3 pos, Quaternion rot, Vector3 scale, bool teleportEndPlayer = false)
     {
         GameObject sequence = Instantiate(cinematic.sequence, pos, rot);
+        sequence.transform.localScale = scale;
         Animator anim = sequence.AddComponent<Animator>();
         anim.runtimeAnimatorController = cinematic.animator;
 
@@ -54,8 +72,7 @@ public class PlayerCinematicController : PlayerModule
             parent.Teleport(player_end_anchor.position);
             parent.usedCamera.SetPosition(camera_anchor.position);
         }
-        yield return null;
-
+        parent.usedCamera.SetViewAngles(camera_anchor.eulerAngles);
         Destroy(sequence);
     }
     IEnumerator AdjustCameraPositionAndViewAngles(Vector3 desiredPosition, Vector3 desiredViewAngles, float moveStep = 1f, float lookStep = 10f)
