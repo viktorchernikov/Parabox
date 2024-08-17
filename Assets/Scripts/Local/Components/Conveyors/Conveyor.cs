@@ -69,7 +69,7 @@ public class Conveyor : MonoBehaviour
     void Update() {
         if (Activated) {
             foreach (MeshRenderer mr in beltParts) {
-                mr.material.SetFloat("_timePassed", mr.material.GetFloat("_timePassed") + Time.deltaTime * Direction * maxSpeed / 20);
+                mr.material.SetFloat("_timePassed", mr.material.GetFloat("_timePassed") + Time.deltaTime * -Direction * maxSpeed / 20);
             }
         }
     }
