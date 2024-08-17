@@ -53,8 +53,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8, y: 0.14587927, z: 4.0346026}
-  m_Center: {x: 0, y: 0.7423291, z: -0.02577281}
+  m_Size: {x: 0.8, y: 0.14587927, z: 3.7777772}
+  m_Center: {x: 0, y: 0.7423291, z: -0.008494794}
 --- !u!114 &1568752562321897896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e5194087e5b2643b88dc04529ac1c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 2.5
+  maxSpeed: 1.75
   Activated: 0
   direction: 1
   beltParts:
@@ -173,7 +173,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 116902902638061589, guid: 968a5b781dc7f2f43a9b576d504e6295,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6805100495926016482}
   m_SourcePrefab: {fileID: 100100000, guid: 968a5b781dc7f2f43a9b576d504e6295, type: 3}
 --- !u!4 &1211884100912482688 stripped
 Transform:
@@ -181,6 +185,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1683153660984979051}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1640596436638516862 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 116902902638061589, guid: 968a5b781dc7f2f43a9b576d504e6295,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683153660984979051}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &6805100495926016482
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640596436638516862}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.010286616, y: 0.03999999, z: 0.0055676894}
+  m_Center: {x: 0.000002763467, y: -0.0000000018626451, z: -0.0006822145}
 --- !u!23 &4101555455414069630 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3436358266100975381, guid: 968a5b781dc7f2f43a9b576d504e6295,
