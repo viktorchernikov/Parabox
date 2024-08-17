@@ -431,6 +431,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f111d8f716b80dd4a9bc0acddfd90efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wormJumpinCinematic: {fileID: 11400000, guid: 333b23c160c197542bca1d9b41ecc6ef,
+    type: 2}
+  wormJumpoutCinematic: {fileID: 11400000, guid: 16ffc98b4d4797e4593a398d16dea12b,
+    type: 2}
   adjustPosAndVeCurve:
     serializedVersion: 2
     m_Curve:

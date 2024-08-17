@@ -4,14 +4,60 @@ using UnityEngine;
 
 public class PlayerCinematicController : PlayerModule
 {
+    [Header("Cinematics")]
+    [SerializeField] PlayerCinematicSeqauence wormJumpinCinematic;
+    [SerializeField] PlayerCinematicSeqauence wormJumpoutCinematic;
+    [Header("Tweaks")]
     [SerializeField] AnimationCurve adjustPosAndVeCurve;
 
 
     private void Start()
     {
-        
+        PlayWormholeJumpin(parent.usedRigidbody.position, 0);
+    }
+    public void PlayWormholeJumpin(Vector3 startPlayerPos, float startPlayerYaw)
+    {
+        StartCoroutine(WormboxSequence(startPlayerPos, startPlayerYaw));
     }
 
+    #region Sequences
+    IEnumerator WormboxSequence(Vector3 startPlayerPos, float startPlayerYaw)
+    {
+        parent.SetDuringCinematic(true);
+        yield return PlaySequence(wormJumpinCinematic, startPlayerPos, Quaternion.identity);
+        yield return PlaySequence(wormJumpoutCinematic, startPlayerPos, Quaternion.identity, true);
+        parent.SetDuringCinematic(false);
+    }
+    #endregion
+
+    #region Helpers
+    IEnumerator PlaySequence(PlayerCinematicSeqauence cinematic, Vector3 pos, Quaternion rot, bool teleportEndPlayer = false)
+    {
+        GameObject sequence = Instantiate(cinematic.sequence, pos, rot);
+        Animator anim = sequence.AddComponent<Animator>();
+        anim.runtimeAnimatorController = cinematic.animator;
+
+        yield return null;
+
+        Transform camera_anchor = sequence.transform.GetChild(0);
+        float time = 0f;
+        while (time <= cinematic.duration)
+        {
+            parent.usedCamera.SetPosition(camera_anchor.position);
+            parent.usedCamera.SetViewAngles(camera_anchor.eulerAngles);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        if (teleportEndPlayer)
+        {
+            Transform player_end_anchor = sequence.transform.GetChild(1);
+            parent.Teleport(player_end_anchor.position);
+            parent.usedCamera.SetPosition(camera_anchor.position);
+        }
+        yield return null;
+
+        Destroy(sequence);
+    }
     IEnumerator AdjustCameraPositionAndViewAngles(Vector3 desiredPosition, Vector3 desiredViewAngles, float moveStep = 1f, float lookStep = 10f)
     {
         Quaternion desiredRotation = Quaternion.Euler(desiredViewAngles);
@@ -34,4 +80,5 @@ public class PlayerCinematicController : PlayerModule
         parent.usedCamera.SetPosition(desiredPosition);
         parent.usedCamera.SetViewAngles(desiredViewAngles);
     }
+    #endregion
 }
