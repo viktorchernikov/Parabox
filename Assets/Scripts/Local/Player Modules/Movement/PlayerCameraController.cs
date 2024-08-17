@@ -27,6 +27,7 @@ public class PlayerCameraController : PlayerModule
     public override void OnInit() { 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        parent.usedCamera.Unparent();
         viewAngles.y = parent.usedCamera.viewAngles.y;
     }
     public override void OnLateUpdate(float deltaTime)

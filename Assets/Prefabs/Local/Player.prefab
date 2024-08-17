@@ -374,6 +374,7 @@ GameObject:
   - component: {fileID: 6685063096683003246}
   - component: {fileID: 927046618816223798}
   - component: {fileID: 1476811334698188517}
+  - component: {fileID: 8073458741565256197}
   - component: {fileID: 5218411153581971947}
   - component: {fileID: 6714971129035188238}
   - component: {fileID: 8445060315836306023}
@@ -415,7 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536761050dabb1646b1f31c0b4c76993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraAnchor: {fileID: 9120694858830240476}
+  _cameraAnchor: {fileID: 0}
 --- !u!114 &927046618816223798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,6 +447,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSeekDistance: 3
+--- !u!114 &8073458741565256197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5478332899588334176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b22d4e4b003360349a886c7812391097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwKey: 113
+  pullingForce: 5
+  minThrowingForce: 4
+  maxThrowingForce: 20
+  chargingPeriod: 2
 --- !u!114 &5218411153581971947
 MonoBehaviour:
   m_ObjectHideFlags: 0

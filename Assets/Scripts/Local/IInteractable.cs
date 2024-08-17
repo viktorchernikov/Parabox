@@ -19,4 +19,5 @@ public enum InteractableHoverResponse
     None,
     Enable,
     Disable,
+    Pick,
 }
