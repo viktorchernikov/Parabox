@@ -33,6 +33,11 @@ public class Switch : MonoBehaviour, IInteractable
     [Header("Parameters")]
     [SerializeField] bool _isActiveDefault = false;
     #endregion
+    #region Components
+    [Header("Components")]
+    [SerializeField] Animator _animator;
+    [SerializeField] AudioSource _audioSource;
+    #endregion
 
 
     public InteractableHoverResponse GetHoverResponse(IInteractor interactor)
@@ -56,9 +61,18 @@ public class Switch : MonoBehaviour, IInteractable
     IEnumerator SwitchSequence()
     {
         isBusy = true;
-        yield return new WaitForSeconds(_switchAnimationDelay);
-        isActive = !isActive;
+        _audioSource.Stop();
+        _audioSource.time = 0;
+        _audioSource.pitch = UnityEngine.Random.Range(0.8f, 1.05f);
+        _audioSource.Play();
+        if (isActive)
+            _animator.SetTrigger("OnDeactivate");
+        else
+            _animator.SetTrigger("OnActivate");
 
+        yield return new WaitForSeconds(_switchAnimationDelay);
+
+        isActive = !isActive;
         if (isActive)
         {
             _onActivateEvent.Invoke();
@@ -69,7 +83,9 @@ public class Switch : MonoBehaviour, IInteractable
             _onDeactivateEvent.Invoke();
             onDeactivate?.Invoke();
         }
+
         yield return new WaitForSeconds(_switchPostDelay);
+
         isBusy = false;
     }
 }
