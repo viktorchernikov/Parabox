@@ -2,9 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.VisualScripting;
 
 public class SettingsMenuManager : MonoBehaviour
 {
+    public GameObject[] Categories;
+    public Color selected;
+    public Color notSelected;
+
     public GameObject menu;
 
     public Slider MasterSlider;
@@ -12,6 +17,15 @@ public class SettingsMenuManager : MonoBehaviour
     public Slider SfxSlider;
     public TMP_InputField mouseX;
     public TMP_InputField mouseY;
+
+
+    public void SetCategory(int categoryNum) {
+        int i = 0;
+        foreach (GameObject f in Categories) {
+            f.SetActive(i == categoryNum);
+            i++;
+        }
+    }
 
     public void SetQuality(int value) {
         PlayerSettings.SetQuality((PlayerSettings.Quality)value);

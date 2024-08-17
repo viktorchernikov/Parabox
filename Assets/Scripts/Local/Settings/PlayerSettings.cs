@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerSettings
 {
-    // - i am vibing to bad piggies building theme rn, 19:44
 
     #region set
     public static void SetVolume(float master = -1f, float music = -1f, float sfx = -1f) {
