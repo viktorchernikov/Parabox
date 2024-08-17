@@ -3,6 +3,7 @@ using UnityEngine;
 
 public sealed class PlayerGroundMotor : PlayerMotor
 {
+    public bool canMove = true;
     [Header("Movement")]
     public float walkSpeed;
     public float sprintSpeed;
@@ -196,6 +197,9 @@ public sealed class PlayerGroundMotor : PlayerMotor
 
     private void MovePlayer()
     {
+        if (!canMove)
+            return;
+
         moveDirection = parent.bodyForward * verticalInput + parent.bodyRight * horizontalInput;
 
         if (grounded)

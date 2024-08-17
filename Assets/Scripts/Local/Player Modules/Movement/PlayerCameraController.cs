@@ -5,6 +5,7 @@ public class PlayerCameraController : PlayerModule
     #region State
     [Header("State")]
     public Vector2 viewAngles = Vector2.zero;
+    public bool canLook = true;
     #endregion
     #region Settings
     [Header("Settings")]
@@ -24,14 +25,20 @@ public class PlayerCameraController : PlayerModule
     #endregion
 
 
-    public override void OnInit() { 
+    public override void OnInit() 
+    { 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        parent.usedCamera.Unparent();
-        viewAngles.y = parent.usedCamera.viewAngles.y;
+        viewAngles = parent.usedCamera.viewAngles;
     }
     public override void OnLateUpdate(float deltaTime)
     {
+        if (!canLook)
+        {
+            viewAngles = parent.usedCamera.viewAngles;
+            return;
+        }
+
         Vector2 input = GetInput();
 
         viewAngles.y += input.x;

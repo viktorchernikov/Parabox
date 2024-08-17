@@ -7,6 +7,7 @@ using UnityEngine;
 public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
 {
     #region State
+    public bool duringCinematic { get; private set; } = false;
     public float currentScale { get; private set; } = 1;
     public PlayerDimensions currentDimensions { get; private set; } = new PlayerDimensions() { height = 2f, radius = 0.4f };
     /// <summary>
@@ -61,7 +62,7 @@ public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
     /// <summary>
     /// References to all modules attached to this player.
     /// </summary>
-    public readonly List<PlayerModule> modules = new List<PlayerModule>();
+    public List<PlayerModule> modules = new List<PlayerModule>();
     #endregion
     #region Points
     public Transform cameraAnchor => _cameraAnchor;
@@ -93,6 +94,24 @@ public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
             throw new NotImplementedException("Other types of movement were not implemented yet!");
         }
         Debug.Log($"Teleported to: {transform.position}");
+    }
+    public void SetDuringCinematic(bool isDuringCinematic)
+    {
+        if (isDuringCinematic)
+        {
+            usedRigidbody.isKinematic = true;
+            usedRigidbody.velocity = Vector3.zero;
+
+            GetModule<PlayerGroundMotor>().canMove = false;
+            GetModule<PlayerCameraController>().canLook = false;
+        }
+        else
+        {
+            usedRigidbody.isKinematic = false;
+
+            GetModule<PlayerGroundMotor>().canMove = true;
+            GetModule<PlayerCameraController>().canLook = true;
+        }
     }
     public void SetScale(float newScale)
     {
