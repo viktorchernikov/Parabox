@@ -87,6 +87,7 @@ public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
         {
             usedRigidbody.Sleep();
             usedRigidbody.position = position;
+            transform.position = position;
             usedRigidbody.WakeUp();
         }
         else
