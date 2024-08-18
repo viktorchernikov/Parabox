@@ -11,6 +11,7 @@ public sealed class PlayerGroundMotor : PlayerMotor
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+    public AnimationCurve speedScalePropoprtion;
     bool readyToJump;
 
     [HideInInspector] public float moveSpeed;
@@ -203,9 +204,9 @@ public sealed class PlayerGroundMotor : PlayerMotor
         moveDirection = parent.bodyForward * verticalInput + parent.bodyRight * horizontalInput;
 
         if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * parent.currentScale * 10f, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * speedScalePropoprtion.Evaluate(parent.currentScale) * 10f, ForceMode.Force);
         else
-            rb.AddForce(moveDirection.normalized * moveSpeed * parent.currentScale * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * moveSpeed * speedScalePropoprtion.Evaluate(parent.currentScale) * 10f * airMultiplier, ForceMode.Force);
     }
     private void CounterScaleGravity()
     {
