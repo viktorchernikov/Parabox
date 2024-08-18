@@ -38,6 +38,11 @@ public class Switch : MonoBehaviour, IInteractable
     [SerializeField] Animator _animator;
     [SerializeField] AudioSource _audioSource;
     #endregion
+    #region
+    [Header("Sounds")]
+    [SerializeField] AudioClip _leverUpClip;
+    [SerializeField] AudioClip _leverDownClip;
+    #endregion
 
 
     public InteractableHoverResponse GetHoverResponse(IInteractor interactor)
@@ -64,11 +69,17 @@ public class Switch : MonoBehaviour, IInteractable
         _audioSource.Stop();
         _audioSource.time = 0;
         _audioSource.pitch = UnityEngine.Random.Range(0.8f, 1.05f);
-        _audioSource.Play();
         if (isActive)
+        {
+            _audioSource.clip = _leverDownClip;
             _animator.SetTrigger("OnDeactivate");
+        }
         else
+        {
+            _audioSource.clip = _leverUpClip;
             _animator.SetTrigger("OnActivate");
+        }
+        _audioSource.Play();
 
         yield return new WaitForSeconds(_switchAnimationDelay);
 

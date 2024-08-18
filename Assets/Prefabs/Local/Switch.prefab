@@ -60,6 +60,8 @@ MonoBehaviour:
   _isActiveDefault: 0
   _animator: {fileID: 5111782297644144293}
   _audioSource: {fileID: 4645814077147445688}
+  _leverUpClip: {fileID: 8300000, guid: c28422dbbf90ac747b69b4838aa5c877, type: 3}
+  _leverDownClip: {fileID: 8300000, guid: 73c3cbbc4397a3b4fa95657108c1f2a3, type: 3}
 --- !u!65 &5169569805143907209
 BoxCollider:
   m_ObjectHideFlags: 0
