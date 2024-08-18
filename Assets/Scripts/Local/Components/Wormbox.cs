@@ -5,10 +5,12 @@ public class Wormbox : MonoBehaviour, IInteractable
 {
     [Header("State")]
     public Player player;
+    public bool isOpen = true;
+    public bool isBusy = false;
     [Header("Settings")]
     public Wormbox linkedBox;
+    public Animator animator;
     public float playerScale = 1f;
-    public bool isBusy = false;
     [Header("Points")]
     public Transform sitPoint;
 
@@ -24,7 +26,7 @@ public class Wormbox : MonoBehaviour, IInteractable
     {
         Player player = interactor as Player;
 
-        return !isBusy && player.currentScale == playerScale;
+        return !isBusy && player.currentScale == playerScale && isOpen;
     }
     public void OnInteract(IInteractor interactor)
     {
@@ -33,6 +35,17 @@ public class Wormbox : MonoBehaviour, IInteractable
 
         player = interactor as Player;
         StartCoroutine(WormholingSequence());
+    }
+
+    public void OpenFlaps()
+    {
+        animator.SetTrigger("OnOpen");
+        isOpen = true;
+    }
+    public void CloseFlaps()
+    {
+        animator.SetTrigger("OnClose");
+        isOpen = false;
     }
 
     IEnumerator WormholingSequence()
@@ -54,6 +67,10 @@ public class Wormbox : MonoBehaviour, IInteractable
         player = null;
     }
 
+    void Awake()
+    {
+        if (isOpen) animator.SetTrigger("OnOpen");
+    }
     void ChangeScale()
     {
         player.SetScale(linkedBox.playerScale);
