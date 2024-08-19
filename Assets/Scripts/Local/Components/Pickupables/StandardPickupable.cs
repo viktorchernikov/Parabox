@@ -7,8 +7,11 @@ public abstract class StandardPickupable : MonoBehaviour, IInteractable, IPickup
 {
     public Transform self => transform;
 
-    public virtual float holdingDistance => 2f;
-    public virtual bool throwable => false;
+    public float HoldingDistance = 3f;
+    public bool IsThrowable = false;
+
+    public virtual float holdingDistance => HoldingDistance;
+    public virtual bool throwable => IsThrowable;
 
     public IInteractor holdedBy;
 
