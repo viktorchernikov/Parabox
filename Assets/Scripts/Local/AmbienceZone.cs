@@ -21,8 +21,6 @@ public class AmbienceZone : MonoBehaviour
 
         if (!player) return;
 
-        Debug.Log("a");
-
         AmbienceManager.main.SetTrack(trackId);
         player.ambientSource.Play();
     }
