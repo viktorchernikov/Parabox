@@ -12,7 +12,9 @@ public class CorkBoard : MonoBehaviour
 
         if (!Attached.ContainsKey(pin)) { 
             Attached.Add(pin, PinState.JustAttached);
+            pickupable.self.GetComponent<Collider>().enabled = false;
             Physics.Raycast(new Ray(collider.transform.position, -transform.forward), out RaycastHit hit, 1f);
+            pickupable.self.GetComponent<Collider>().enabled = true;
             pin.Attach(transform.forward, hit.point);
             pickupable.DropItself();
         }

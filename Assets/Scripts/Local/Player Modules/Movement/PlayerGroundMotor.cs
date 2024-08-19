@@ -123,7 +123,7 @@ public sealed class PlayerGroundMotor : PlayerMotor
         Vector3 origin = transform.position;
         origin += Vector3.up * groundCheckOffset;
 
-        grounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance, whatIsGround);
+        grounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance * parent.currentScale, whatIsGround);
     }
 
     private void MyInput()
@@ -218,9 +218,9 @@ public sealed class PlayerGroundMotor : PlayerMotor
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        if (flatVel.magnitude > moveSpeed)
+        if (flatVel.magnitude > moveSpeed * parent.currentScale)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            Vector3 limitedVel = flatVel.normalized * moveSpeed * parent.currentScale;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }

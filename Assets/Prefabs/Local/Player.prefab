@@ -547,7 +547,7 @@ MonoBehaviour:
   walkSpeed: 3
   sprintSpeed: 3
   groundDrag: 6
-  jumpForce: 0
+  jumpForce: 10
   jumpCooldown: 0.25
   airMultiplier: 0
   speedScalePropoprtion:
