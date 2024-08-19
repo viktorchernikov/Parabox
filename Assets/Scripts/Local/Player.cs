@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
 {
+    [Header("OnStart")]
+    public float initialScale = 1f;
     #region State
     public bool duringCinematic { get; private set; } = false;
     public float currentScale { get; private set; } = 1;
@@ -196,6 +198,7 @@ public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
     }
     private void Start()
     {
+        SetScale(initialScale);
         SetEnvironment(this, EnvironmentType.Air);
     }
     void Update()
