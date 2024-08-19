@@ -417,6 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536761050dabb1646b1f31c0b4c76993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialScale: 1
   modules: []
   _cameraAnchor: {fileID: 9120694858830240476}
 --- !u!114 &625567549193379574
@@ -539,12 +540,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveType: 0
   canMove: 1
-  walkSpeed: 4
-  sprintSpeed: 6
+  walkSpeed: 3
+  sprintSpeed: 3
   groundDrag: 6
-  jumpForce: 5
+  jumpForce: 0
   jumpCooldown: 0.25
   airMultiplier: 0
+  speedScalePropoprtion:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.3
+      inSlope: 0.7
+      outSlope: 0.7
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.7
+      outSlope: 0.7
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   moveSpeed: 0
   StaminaWorkInSky: 0
   maxStamina: 100

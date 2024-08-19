@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Wormbox Jumpin
   m_EditorClassIdentifier: 
   duration: 2.6
-  sequence: {fileID: 919132149155446097, guid: f6e1aa565af97f448b599bac98354eb4, type: 3}
-  animator: {fileID: 9100000, guid: a5ca11394ccc7664eb4afbb48acae90d, type: 2}
+  sequence: {fileID: 5099978915083717064, guid: 3e01b7cb7e3de20449cb886467fb212b,
+    type: 3}
   cameraStartViewAngles: {x: 10, y: 0, z: 0}

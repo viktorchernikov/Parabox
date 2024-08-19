@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class PlayerCinematicController : PlayerModule
@@ -37,9 +36,18 @@ public class PlayerCinematicController : PlayerModule
         Vector3 cameraToBoxPos = playerToBoxPos + Vector3.up * parent.cameraAnchor.localPosition.y;
 
         yield return AdjustCameraPositionAndViewAngles(cameraToBoxPos, playerToBoxAng.eulerAngles, 1f, 30f);
-        
-        yield return PlaySequence(wormJumpinCinematic, playerToBoxPos, Quaternion.identity * Quaternion.Euler(0, playerToBoxYaw, 0), Vector3.one * parent.currentScale);
+
+        float flapsCloseDelay = 1.5f;
+        StartCoroutine(PlaySequence(wormJumpinCinematic, playerToBoxPos, Quaternion.identity * Quaternion.Euler(0, playerToBoxYaw, 0), Vector3.one * parent.currentScale));
+        yield return new WaitForSeconds(flapsCloseDelay);
+        box.CloseFlaps();
+        box.linkedBox.CloseFlaps();
+        yield return new WaitForSeconds(wormJumpinCinematic.duration - flapsCloseDelay);
+
         onWormholeTeleport?.Invoke();
+
+        box.OpenFlaps();
+        box.linkedBox.OpenFlaps();
         yield return PlaySequence(wormJumpoutCinematic, box.linkedBox.sitPoint.position, Quaternion.identity * Quaternion.Euler(0, box.linkedBox.transform.eulerAngles.y, 0), Vector3.one * box.linkedBox.playerScale, true);
 
         parent.SetDuringCinematic(false);
@@ -52,12 +60,10 @@ public class PlayerCinematicController : PlayerModule
     {
         GameObject sequence = Instantiate(cinematic.sequence, pos, rot);
         sequence.transform.localScale = scale;
-        Animator anim = sequence.AddComponent<Animator>();
-        anim.runtimeAnimatorController = cinematic.animator;
 
         yield return null;
 
-        Transform camera_anchor = sequence.transform.GetChild(0);
+        Transform camera_anchor = sequence.transform.GetChild(0).GetChild(0);
         float time = 0f;
         while (time <= cinematic.duration)
         {
@@ -68,7 +74,7 @@ public class PlayerCinematicController : PlayerModule
         }
         if (teleportEndPlayer)
         {
-            Transform player_end_anchor = sequence.transform.GetChild(1);
+            Transform player_end_anchor = sequence.transform.GetChild(0).GetChild(1);
             parent.Teleport(player_end_anchor.position);
             parent.usedCamera.SetPosition(camera_anchor.position);
         }
