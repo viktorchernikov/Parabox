@@ -8,6 +8,7 @@ public abstract class StandardPickupable : MonoBehaviour, IInteractable, IPickup
     public Transform self => transform;
 
     public virtual float holdingDistance => 2f;
+    public virtual bool throwable => false;
 
     public IInteractor holdedBy;
 
@@ -34,6 +35,8 @@ public abstract class StandardPickupable : MonoBehaviour, IInteractable, IPickup
 
     public virtual void Throw(Vector3 lookDir, float force)
     {
+        if (!throwable) return;
+
         GetComponent<Rigidbody>().AddForce(lookDir * force, ForceMode.VelocityChange);
     }
 

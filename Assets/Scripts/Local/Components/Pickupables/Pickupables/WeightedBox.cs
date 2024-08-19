@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class WeightedBox : StandardPickupable
 {
-    
+    public override float holdingDistance => 3f;
 }
