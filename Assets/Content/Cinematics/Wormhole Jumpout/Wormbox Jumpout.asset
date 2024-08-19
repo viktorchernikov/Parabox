@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Wormbox Jumpout
   m_EditorClassIdentifier: 
   duration: 2.38
-  sequence: {fileID: 919132149155446097, guid: 6fffe38849e5b7442b2250c923e275c0, type: 3}
-  animator: {fileID: 9100000, guid: de576918c12e3b24993e83196b323ff1, type: 2}
+  sequence: {fileID: 1191358852275455331, guid: 7e70ef28da8073448b325416d2fc0db3,
+    type: 3}
+  cameraStartViewAngles: {x: 0, y: 0, z: 0}
