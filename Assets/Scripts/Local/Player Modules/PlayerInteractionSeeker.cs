@@ -22,7 +22,7 @@ public class PlayerInteractionSeeker : PlayerModule
         base.OnFixedUpdate(deltaTime);
 
         IInteractable currentHover = null;
-        int count = Physics.RaycastNonAlloc(parent.usedCamera.forwardRay, hitObjects, maxSeekDistance);
+        int count = Physics.RaycastNonAlloc(parent.usedCamera.forwardRay, hitObjects, maxSeekDistance * parent.currentScale);
 
         if (count != 0)
         {
