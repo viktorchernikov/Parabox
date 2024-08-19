@@ -8,4 +8,5 @@ public interface IPickupable {
     public void Throw(Vector3 lookDir, float force);
 
     public virtual bool CanPickUp(IInteractor interactor) { return true; }
+    public void DropItself();
 }

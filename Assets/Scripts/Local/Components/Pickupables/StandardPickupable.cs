@@ -9,6 +9,8 @@ public abstract class StandardPickupable : MonoBehaviour, IInteractable, IPickup
 
     public virtual float holdingDistance => 2f;
 
+    public IInteractor holdedBy;
+
     public virtual InteractableHoverResponse GetHoverResponse(IInteractor interactor)
     {
         return CanInteract(interactor) ? InteractableHoverResponse.Pick : InteractableHoverResponse.None;
@@ -24,12 +26,21 @@ public abstract class StandardPickupable : MonoBehaviour, IInteractable, IPickup
     {
         PlayerHoldingModule phm = ((Player)interactor).GetModule<PlayerHoldingModule>();
 
+        holdedBy = interactor;
+
         if (phm.currentlyHolding == null) { phm.currentlyHolding = this; GetComponent<Rigidbody>().useGravity = false; }
-        else phm.Drop();
+        else { phm.Drop(); holdedBy = null; }
     }
 
     public virtual void Throw(Vector3 lookDir, float force)
     {
         GetComponent<Rigidbody>().AddForce(lookDir * force, ForceMode.VelocityChange);
+    }
+
+    public void DropItself()
+    {
+        if (holdedBy == null) return;
+
+        (holdedBy as Player).GetModule<PlayerHoldingModule>().Drop();
     }
 }
