@@ -10,6 +10,8 @@ public class PlayerCinematicController : PlayerModule
     [SerializeField] PlayerCinematicSeqauence wormJumpoutCinematic;
     [Header("Tweaks")]
     [SerializeField] AnimationCurve adjustPosAndVeCurve;
+    [Header("Components")]
+    [SerializeField] AudioSource audioSource;
 
     public event Action onWormholeTeleport;
 
@@ -38,7 +40,7 @@ public class PlayerCinematicController : PlayerModule
         yield return AdjustCameraPositionAndViewAngles(cameraToBoxPos, playerToBoxAng.eulerAngles, 1f, 30f);
 
         float flapsCloseDelay = 1.5f;
-        StartCoroutine(PlaySequence(wormJumpinCinematic, playerToBoxPos, Quaternion.identity * Quaternion.Euler(0, playerToBoxYaw, 0), Vector3.one * parent.currentScale));
+        StartCoroutine(PlaySequence(wormJumpinCinematic, playerToBoxPos, Quaternion.identity * Quaternion.Euler(0, playerToBoxYaw, 0), Vector3.one * parent.currentScale, false, true));
         yield return new WaitForSeconds(flapsCloseDelay);
         box.CloseFlaps();
         box.linkedBox.CloseFlaps();
@@ -56,12 +58,20 @@ public class PlayerCinematicController : PlayerModule
     #endregion
 
     #region Helpers
-    IEnumerator PlaySequence(PlayerCinematicSeqauence cinematic, Vector3 pos, Quaternion rot, Vector3 scale, bool teleportEndPlayer = false)
+    IEnumerator PlaySequence(PlayerCinematicSeqauence cinematic, Vector3 pos, Quaternion rot, Vector3 scale, bool teleportEndPlayer = false, bool playAudio = false)
     {
         GameObject sequence = Instantiate(cinematic.sequence, pos, rot);
         sequence.transform.localScale = scale;
 
         yield return null;
+
+        if (playAudio)
+        {
+            audioSource.Stop();
+            audioSource.time = 0;
+            audioSource.clip = cinematic.audio;
+            audioSource.Play();
+        }
 
         Transform camera_anchor = sequence.transform.GetChild(0).GetChild(0);
         float time = 0f;
