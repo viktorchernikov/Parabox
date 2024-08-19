@@ -59,6 +59,7 @@ public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
     /// </summary>
     public Rigidbody usedRigidbody { get; private set; }
     public CapsuleCollider usedCollider { get; private set; }
+    public AudioSource ambientSource;
     #endregion
     #region Modules
     /// <summary>

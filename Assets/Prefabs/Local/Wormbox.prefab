@@ -235,11 +235,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 673659619506827776, guid: 804aeaaacc6acf94e8fa61be928d9fc7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5399dc50b140b304b8ad6ddc31bbff00, type: 2}
     - target: {fileID: 919132149155446097, guid: 804aeaaacc6acf94e8fa61be928d9fc7,
         type: 3}
       propertyPath: m_Name
       value: wormbox-model
       objectReference: {fileID: 0}
+    - target: {fileID: 6482051972957217621, guid: 804aeaaacc6acf94e8fa61be928d9fc7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5399dc50b140b304b8ad6ddc31bbff00, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
