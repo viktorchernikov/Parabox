@@ -2814,6 +2814,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: pin light
       objectReference: {fileID: 0}
+    - target: {fileID: 5117134592615866130, guid: 95d8d10726226c84fa91acff670ef186,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6249970099414871555, guid: 95d8d10726226c84fa91acff670ef186,
         type: 3}
       propertyPath: HoldingDistance
@@ -22246,6 +22251,11 @@ PrefabInstance:
       propertyPath: IsThrowable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32246,6 +32256,11 @@ PrefabInstance:
         type: 3}
       propertyPath: IsThrowable
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -43949,6 +43964,11 @@ PrefabInstance:
       propertyPath: IsThrowable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46002,6 +46022,11 @@ PrefabInstance:
       propertyPath: IsThrowable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46803,6 +46828,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6643975807133792259, guid: 68f398960f25b4a43bf9da8288e564c4,
         type: 3}
@@ -58866,6 +58896,11 @@ PrefabInstance:
       propertyPath: IsThrowable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -59780,6 +59815,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: pin
       objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6643975807133792259, guid: 68f398960f25b4a43bf9da8288e564c4,
         type: 3}
       propertyPath: m_IsKinematic
@@ -60185,6 +60225,11 @@ PrefabInstance:
         type: 3}
       propertyPath: IsThrowable
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -75279,6 +75324,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6643975807133792259, guid: 68f398960f25b4a43bf9da8288e564c4,
         type: 3}
       propertyPath: m_IsKinematic
@@ -77811,6 +77861,11 @@ PrefabInstance:
       propertyPath: IsThrowable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77898,6 +77953,11 @@ PrefabInstance:
         type: 3}
       propertyPath: IsThrowable
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -78198,6 +78258,11 @@ PrefabInstance:
         type: 3}
       propertyPath: IsThrowable
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -85261,6 +85326,11 @@ PrefabInstance:
       propertyPath: pinColor.r
       value: 0.5777723
       objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6643975807133792259, guid: 68f398960f25b4a43bf9da8288e564c4,
         type: 3}
       propertyPath: m_IsKinematic
@@ -89137,6 +89207,11 @@ PrefabInstance:
         type: 3}
       propertyPath: IsThrowable
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -93499,6 +93574,11 @@ PrefabInstance:
       propertyPath: pinColor.g
       value: 0.5969354
       objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6643975807133792259, guid: 68f398960f25b4a43bf9da8288e564c4,
         type: 3}
       propertyPath: m_IsKinematic
@@ -94546,6 +94626,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: pin light (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5117134592615866130, guid: 95d8d10726226c84fa91acff670ef186,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6249970099414871555, guid: 95d8d10726226c84fa91acff670ef186,
         type: 3}
       propertyPath: IsThrowable
@@ -94969,6 +95054,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6643975807133792259, guid: 68f398960f25b4a43bf9da8288e564c4,
         type: 3}
@@ -96305,6 +96395,11 @@ PrefabInstance:
         type: 3}
       propertyPath: pinColor.g
       value: 0.5969354
+      objectReference: {fileID: 0}
+    - target: {fileID: 6291731312916818714, guid: 68f398960f25b4a43bf9da8288e564c4,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6643975807133792259, guid: 68f398960f25b4a43bf9da8288e564c4,
         type: 3}
