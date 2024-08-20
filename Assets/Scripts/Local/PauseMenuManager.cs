@@ -22,6 +22,8 @@ public class PauseMenuManager : MonoBehaviour
     {
         GamePause.active = false;
         SettingsMenu.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         LoadingMenuManager.inst.LoadScene("Menu");
     }
     [Obsolete]
