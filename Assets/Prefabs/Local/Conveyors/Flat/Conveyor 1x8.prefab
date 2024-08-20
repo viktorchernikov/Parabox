@@ -73,7 +73,7 @@ MonoBehaviour:
   lerpDirection: 0
   maxSpeed: 1.75
   accelerationForce: 30
-  directionChangeSpeed: 2
+  directionChangeSpeed: 1
   beltParts:
   - {fileID: 3531220847599069901}
 --- !u!1001 &2211565402934586840
