@@ -607,6 +607,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fbce3093b6e51d548b929855dff00201, type: 3}
   - {fileID: 8300000, guid: 79ed8efed6065ff4c866f2e41b4e4034, type: 3}
   - {fileID: 8300000, guid: db720605e6090264bbcc0149dbb32f4c, type: 3}
+  landingSound: {fileID: 8300000, guid: f1d336c3844638048933fe3c8bd4a38c, type: 3}
   walkFootstepInterval: 0.5
   sprintFootstepInterval: 0.3
   VolumeOfFootstep: 0.4

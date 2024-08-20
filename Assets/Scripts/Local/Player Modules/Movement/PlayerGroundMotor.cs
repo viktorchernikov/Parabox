@@ -51,10 +51,13 @@ public sealed class PlayerGroundMotor : PlayerMotor
     public AudioClip[] defaultSounds;
     public AudioClip[] metalSounds;
     public AudioClip[] woodSounds;
+    public AudioClip landingSound;
     public float walkFootstepInterval;
     public float sprintFootstepInterval;
     public float VolumeOfFootstep = 0.7f;
     private float footstepTimer;
+
+    float lastLandingTime = 0;
 
     public override void OnInit()
     {
@@ -129,7 +132,16 @@ public sealed class PlayerGroundMotor : PlayerMotor
         Vector3 origin = transform.position;
         origin += Vector3.up * groundCheckOffset;
 
-        grounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance * parent.currentScale, whatIsGround);
+        bool newGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance * parent.currentScale, whatIsGround);
+        if (!grounded && newGrounded)
+        {
+            if (Time.time - lastLandingTime > 0.3f)
+            {
+                lastLandingTime = Time.time;
+                audioSource.PlayOneShot(landingSound);
+            }
+        }
+        grounded = newGrounded;
     }
 
     private void MyInput()
