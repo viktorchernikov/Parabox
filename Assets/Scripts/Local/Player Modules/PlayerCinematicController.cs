@@ -1,13 +1,20 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.Rendering.DebugUI.Table;
+using UnityEngine.UIElements;
 
 public class PlayerCinematicController : PlayerModule
 {
+    public bool playOpening = false;
+    public Vector3 openingPos = Vector3.zero;
+
     public bool isPlaying { get; private set; } = false;
     [Header("Cinematics")]
     [SerializeField] PlayerCinematicSeqauence wormJumpinCinematic;
     [SerializeField] PlayerCinematicSeqauence wormJumpoutCinematic;
+    [SerializeField] PlayerCinematicSeqauence openingCinematic;
     [Header("Tweaks")]
     [SerializeField] AnimationCurve adjustPosAndVeCurve;
     [Header("Components")]
@@ -16,9 +23,33 @@ public class PlayerCinematicController : PlayerModule
     public event Action onWormholeTeleport;
 
 
-    private void Start()
+    private IEnumerator Start()
     {
+        if (!playOpening) yield return null;
+        isPlaying = true;
+        parent.SetDuringCinematic(true);
 
+
+        GameObject sequence = Instantiate(openingCinematic.sequence, openingPos, Quaternion.identity);
+        sequence.transform.localScale = Vector3.one * 0.5f;
+
+        yield return null;
+
+
+        Transform camera_anchor = sequence.transform.GetChild(0).GetChild(0);
+        float time = 0f;
+        while (time <= openingCinematic.duration)
+        {
+            parent.usedCamera.SetPosition(camera_anchor.position);
+            parent.usedCamera.SetViewAngles((Quaternion.Euler(camera_anchor.eulerAngles) * Quaternion.Euler(-60, 0, -180)).eulerAngles);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        parent.usedCamera.SetViewAngles(camera_anchor.eulerAngles);
+        Destroy(sequence);
+
+        parent.SetDuringCinematic(false);
+        isPlaying = false;
     }
     public void PlayWormholeJumpin(Wormbox box)
     {
