@@ -9,7 +9,7 @@ public class GameInitializer : MonoBehaviour
         if (!loadedAlwaysActive)
         {
             SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
-            SceneManager.LoadScene("SettingsMenu", LoadSceneMode.Additive);
+            //SceneManager.LoadScene("SettingsMenu", LoadSceneMode.Additive);
             SceneManager.LoadScene("Loading", LoadSceneMode.Additive);
             loadedAlwaysActive = true;
         }
