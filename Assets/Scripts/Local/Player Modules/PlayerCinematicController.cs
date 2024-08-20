@@ -65,14 +65,14 @@ public class PlayerCinematicController : PlayerModule
         }
         Transform player_end_anchor = sequence2.transform.GetChild(0).GetChild(1);
         parent.SetDuringCinematic(false);
-        parent.Teleport(player_end_anchor.position - new Vector3(0, 0.95f, 0));
+        parent.Teleport(player_end_anchor.position - new Vector3(0, 0.0f, 0));
         parent.usedCamera.SetPosition(camera_anchor.position);
-        Debug.Log(camera_anchor.position.y);
+        Debug.Log(player_end_anchor.position.y);
         parent.GetModule<PlayerCameraController>().viewAngles = new Vector2(0, openingSpawnYaw);
         yield return null;
         Destroy(sequence);
         Destroy(sequence2);
-        Debug.Log(parent.usedCamera.position.y);
+        Debug.Log(parent.transform.position.y);
         isPlaying = false;
     }
     public void PlayWormholeJumpin(Wormbox box)
