@@ -3,7 +3,9 @@ using UnityEngine;
 
 public sealed class PlayerGroundMotor : PlayerMotor
 {
+    [Header("State")]
     public bool canMove = true;
+    public bool grounded;
     [Header("Movement")]
     public float walkSpeed;
     public float sprintSpeed;
@@ -33,7 +35,6 @@ public sealed class PlayerGroundMotor : PlayerMotor
     [SerializeField] public float groundCheckDistance = 0.3f;
     [SerializeField] public float groundCheckOffset = 0.01f;
     [SerializeField] public LayerMask whatIsGround;
-    [SerializeField] bool grounded;
 
     public float speedofplayul = 0.1f;
     public bool audiocanplay = true;

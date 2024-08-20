@@ -24,7 +24,7 @@ public class PlayerInteractionSeeker : PlayerModule
         IInteractable currentHover = null;
         int count = Physics.RaycastNonAlloc(parent.usedCamera.forwardRay, hitObjects, maxSeekDistance * parent.currentScale);
 
-        if (count != 0)
+        if (count != 0 && IsGrounded())
         {
             Array.Sort(hitObjects, (a, b) => (b.distance.CompareTo(a.distance)));
 
@@ -57,7 +57,7 @@ public class PlayerInteractionSeeker : PlayerModule
         if (hoveredObject == null)
             return;
         
-        if (hoveredObject.CanInteract(parent) && GetInput())
+        if (hoveredObject.CanInteract(parent) && GetInput() && IsGrounded())
         {
             hoveredObject.OnInteract(parent);
         }
@@ -67,4 +67,5 @@ public class PlayerInteractionSeeker : PlayerModule
     {
         return Input.GetKeyDown(KeyCode.E);
     }
+    bool IsGrounded() => parent.GetModule<PlayerGroundMotor>().grounded;
 }
