@@ -436,11 +436,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOpening: 0
+  openingPos: {x: 0, y: 0, z: 0}
+  openingSpawnPos: {x: 0, y: 0, z: 0}
+  openingSpawnYaw: 0
   wormJumpinCinematic: {fileID: 11400000, guid: 333b23c160c197542bca1d9b41ecc6ef,
     type: 2}
   wormJumpoutCinematic: {fileID: 11400000, guid: 16ffc98b4d4797e4593a398d16dea12b,
     type: 2}
   openingCinematic: {fileID: 11400000, guid: bede193c939774b40b954a254af0c88f, type: 2}
+  openingSpawnCinematic: {fileID: 11400000, guid: c747f575bec35ff45a1584f581ce9811,
+    type: 2}
   adjustPosAndVeCurve:
     serializedVersion: 2
     m_Curve:

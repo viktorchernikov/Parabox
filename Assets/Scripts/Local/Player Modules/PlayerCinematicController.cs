@@ -9,12 +9,15 @@ public class PlayerCinematicController : PlayerModule
 {
     public bool playOpening = false;
     public Vector3 openingPos = Vector3.zero;
+    public Vector3 openingSpawnPos = Vector3.zero;
+    public float openingSpawnYaw = 0;
 
     public bool isPlaying { get; private set; } = false;
     [Header("Cinematics")]
     [SerializeField] PlayerCinematicSeqauence wormJumpinCinematic;
     [SerializeField] PlayerCinematicSeqauence wormJumpoutCinematic;
     [SerializeField] PlayerCinematicSeqauence openingCinematic;
+    [SerializeField] PlayerCinematicSeqauence openingSpawnCinematic;
     [Header("Tweaks")]
     [SerializeField] AnimationCurve adjustPosAndVeCurve;
     [Header("Components")]
@@ -45,10 +48,32 @@ public class PlayerCinematicController : PlayerModule
             time += Time.deltaTime;
             yield return null;
         }
-        parent.usedCamera.SetViewAngles(camera_anchor.eulerAngles);
-        Destroy(sequence);
+        parent.usedCamera.SetPosition(camera_anchor.position);
+        parent.usedCamera.SetViewAngles((Quaternion.Euler(camera_anchor.eulerAngles) * Quaternion.Euler(-60, 0, -180)).eulerAngles);
 
+
+        GameObject sequence2 = Instantiate(openingSpawnCinematic.sequence, openingSpawnPos, Quaternion.identity * Quaternion.Euler(0, openingSpawnYaw, 0));
+        sequence2.transform.localScale = Vector3.one;
+
+        yield return new WaitForFixedUpdate();
+
+        camera_anchor = sequence2.transform.GetChild(0).GetChild(0);
+        time = 0f;
+        while (time <= openingSpawnCinematic.duration)
+        {
+            parent.usedCamera.SetPosition(camera_anchor.position);
+            parent.usedCamera.SetViewAngles((Quaternion.Euler(camera_anchor.eulerAngles) * Quaternion.Euler(-90, 0, -180)).eulerAngles);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        Transform player_end_anchor = sequence2.transform.GetChild(0).GetChild(1);
         parent.SetDuringCinematic(false);
+        parent.Teleport(player_end_anchor.position);
+        parent.usedCamera.SetPosition(camera_anchor.position);
+        parent.GetModule<PlayerCameraController>().viewAngles = new Vector2(0, openingSpawnYaw - 180);
+        yield return null;
+        Destroy(sequence);
+        Destroy(sequence2);
         isPlaying = false;
     }
     public void PlayWormholeJumpin(Wormbox box)
