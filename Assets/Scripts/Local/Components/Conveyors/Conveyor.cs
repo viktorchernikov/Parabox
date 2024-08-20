@@ -21,6 +21,7 @@ public class Conveyor : MonoBehaviour
     {
         foreach(var rigidbody in affectedRigidbodies)
         {
+            if (!Activated) return;
             float inDir = Vector3.Dot(beltForward * lerpDirection, rigidbody.velocity);
             if (inDir < maxSpeed) rigidbody.AddForce(beltForward * accelerationForce * lerpDirection);
         }
