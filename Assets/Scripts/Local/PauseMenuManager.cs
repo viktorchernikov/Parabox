@@ -35,7 +35,7 @@ public class PauseMenuManager : MonoBehaviour
     private void Update() {
         if (!FindFirstObjectByType<SettingsMenuManager>().IsShown()) childMenuOpen = false;
 
-        if (Input.GetKeyDown(KeyCode.Escape)){
+        if (Input.GetKeyDown(KeyCode.I)){
             if (showMenu && !childMenuOpen) showMenu = false;
             else if (!showMenu && SceneManager.GetActiveScene().name != "Menu") showMenu = true;
         }
