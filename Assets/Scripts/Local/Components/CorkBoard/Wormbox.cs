@@ -20,7 +20,7 @@ public class Wormbox : MonoBehaviour, IInteractable
         if (isBusy)
             return InteractableHoverResponse.None;
 
-        return InteractableHoverResponse.Enable;
+        return InteractableHoverResponse.Jumpin;
     }
     public bool CanInteract(IInteractor interactor)
     {
