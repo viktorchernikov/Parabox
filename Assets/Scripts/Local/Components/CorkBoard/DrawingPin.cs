@@ -6,8 +6,6 @@ public class DrawingPin : StandardPickupable, IPin
 {
     public Color pinColor;
 
-    public override float holdingDistance => 1.25f;
-
     public bool attached { get; private set; }
 
     Vector3 currentBoardDir = Vector3.zero;

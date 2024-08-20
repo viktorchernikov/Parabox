@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +9,9 @@ public class Switch : MonoBehaviour, IInteractable
     #region State
     public bool isActive { get => _isActive; private set => _isActive = value; }
     public bool isBusy { get => _isBusy; private set => _isBusy = value; }
+    public bool isScaleSensitive = false;
+    public float minScale = 0f;
+    public float maxScale = 2f;
     #endregion
     #region Events
     public event Action onActivate;
@@ -54,7 +58,12 @@ public class Switch : MonoBehaviour, IInteractable
     }
     public bool CanInteract(IInteractor interactor)
     {
-        return !isBusy;
+        Player player = interactor as Player;
+
+        if (!player) return false;
+        
+        bool scaleFactor = player.currentScale >= minScale && player.currentScale <= maxScale;
+        return !isBusy && (isScaleSensitive ? scaleFactor : true);
     }
     public void OnInteract(IInteractor interactor)
     {

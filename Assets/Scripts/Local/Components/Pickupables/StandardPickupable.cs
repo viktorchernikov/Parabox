@@ -9,6 +9,9 @@ public abstract class StandardPickupable : MonoBehaviour, IInteractable, IPickup
 
     public float HoldingDistance = 3f;
     public bool IsThrowable = false;
+    public bool isScaleSensitive = false;
+    public float minScale = 0f;
+    public float maxScale = 2f;
 
     public virtual float holdingDistance => HoldingDistance;
     public virtual bool throwable => IsThrowable;
@@ -17,18 +20,26 @@ public abstract class StandardPickupable : MonoBehaviour, IInteractable, IPickup
 
     public virtual InteractableHoverResponse GetHoverResponse(IInteractor interactor)
     {
-        return CanInteract(interactor) ? InteractableHoverResponse.Pick : InteractableHoverResponse.None;
+        return holdedBy == null ? InteractableHoverResponse.Pick : (IsThrowable ? InteractableHoverResponse.DropThrow : InteractableHoverResponse.Drop);
     }
 
     public virtual bool CanInteract(IInteractor interactor)
     {
-        IPickupable ipck = ((Player)interactor).GetModule<PlayerHoldingModule>().currentlyHolding;
+        Player player = interactor as Player;
+
+        if (!player) return false;
+
+        if (isScaleSensitive && (player.currentScale < minScale || player.currentScale > maxScale)) return false;
+
+
+        IPickupable ipck = player.GetModule<PlayerHoldingModule>().currentlyHolding;
         return ipck == null || ipck == (IPickupable)this;
     }
 
     public virtual void OnInteract(IInteractor interactor) 
     {
-        PlayerHoldingModule phm = ((Player)interactor).GetModule<PlayerHoldingModule>();
+        Player player = (Player)interactor;
+        PlayerHoldingModule phm = player.GetModule<PlayerHoldingModule>();
 
         holdedBy = interactor;
 

@@ -20,4 +20,6 @@ public enum InteractableHoverResponse
     Enable,
     Disable,
     Pick,
+    DropThrow,
+    Drop
 }
