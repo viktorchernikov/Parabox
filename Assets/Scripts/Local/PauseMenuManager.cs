@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 
 
@@ -32,6 +33,7 @@ public class PauseMenuManager : MonoBehaviour
 
 
     void Awake() {
+        if (main != this && main != null) { Destroy(menu); Destroy(gameObject); return; }
         main = this;
         menu.SetActive(false);
         DontDestroyOnLoad(gameObject);

@@ -19,6 +19,8 @@ public class LoadingMenuManager : MonoBehaviour
     public static LoadingMenuManager inst;
 
     void Awake() {
+        if (inst != this && inst != null) { Destroy(canvas); Destroy(gameObject); return; }
+
         inst = this;
     }
 

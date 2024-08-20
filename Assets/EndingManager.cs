@@ -48,13 +48,13 @@ public class EndingManager : MonoBehaviour
     IEnumerator UI() {
         float timePassed = 0f;
         while (timePassed < 26f) {
-            if (timePassed > 21f) {
+            if (timePassed > 17f) {
                 SetUIStagesActive(4);
             }
-            else if (timePassed > 15f) {
+            else if (timePassed > 11f) {
                 SetUIStagesActive(3);
             }
-            else if (timePassed > 12f) {
+            else if (timePassed > 9f) {
                 SetUIStagesActive(2);
             }
             else if (timePassed > 5f) {

@@ -20,6 +20,8 @@ public class SettingsMenuManager : MonoBehaviour
     public TMP_InputField mouseX;
     public TMP_InputField mouseY;
 
+    public static SettingsMenuManager inst;
+
 
     public void SetCategory(int categoryNum) {
         int i = 0;
@@ -66,6 +68,10 @@ public class SettingsMenuManager : MonoBehaviour
     CursorLockMode prev;
 
     void Start() {
+        if (inst != null && inst != this) { Destroy(menu); Destroy(gameObject); return; }
+
+        inst = this; 
+
         DontDestroyOnLoad(this);
         DontDestroyOnLoad(menu);
     }
