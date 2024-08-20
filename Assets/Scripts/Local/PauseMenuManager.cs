@@ -1,79 +1,77 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class PauseMenuManager : MonoBehaviour
 {
-    public bool showMenu;
-    public bool childMenuOpen;
+    public bool shown => GamePause.active && !SettingsMenu.visible;
     public GameObject menu;
 
-    CursorLockMode prev;
+    public static PauseMenuManager main;
 
+    #region Obsolete
+    [Obsolete] public bool showMenu;
+    [Obsolete] public bool childMenuOpen;
+    [Obsolete] CursorLockMode prev;
+    [Obsolete] public static PauseMenuManager inst;
+    [Obsolete] public void OpenUp() => showMenu = true;
+    [Obsolete] public void CloseDown() => showMenu = false;
+    [Obsolete]
+    public void MainMenu()
+    {
+        GamePause.active = false;
+        SettingsMenu.visible = false;
+        LoadingMenuManager.inst.LoadScene("Menu");
+    }
+    [Obsolete]
+    public void Settings()
+    {
+        FindFirstObjectByType<SettingsMenuManager>().OpenUp();
+    }
+    #endregion
 
-    public static PauseMenuManager inst;
 
     void Awake() {
-        inst = this;
-    }
-
-    void Start() {
-        DontDestroyOnLoad(this);
+        main = this;
+        menu.SetActive(false);
+        DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(menu);
     }
+    void Update() 
+    {
+        if (!Player.local) return;
 
-    public void OpenUp() {
-        showMenu = true;
-    }
-
-    public void CloseDown() {
-        showMenu = false;
-    }
-
-    bool oldShowMenu = false;
-    private void Update() {
-        if (!FindFirstObjectByType<SettingsMenuManager>().IsShown()) childMenuOpen = false;
-
-        if (Input.GetKeyDown(KeyCode.I)){
-            if (showMenu && !childMenuOpen) showMenu = false;
-            else if (!showMenu && SceneManager.GetActiveScene().name != "Menu") showMenu = true;
+        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GamePause.active)
+                Resume();
+            else
+                Pause();
         }
-
-        if (showMenu != oldShowMenu) {
-            menu.SetActive(showMenu);
-            if (showMenu) {
-                prev = Cursor.lockState;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                Debug.Log("showmenu");
-            }
-            else {
-                Cursor.lockState = prev;
-                Cursor.visible = false;
-            }
-        }
-
-        Debug.Log(Cursor.lockState);
-        oldShowMenu = showMenu;
+        menu.SetActive(shown);
     }
 
-
-
-    public void Resume() {
-        CloseDown();
-        FindFirstObjectByType<SettingsMenuManager>().Close();
-        Debug.Log("Resume");
+    public void Resume()
+    {
+        GamePause.active = false;
+        SettingsMenu.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        menu.SetActive(false);
+        Time.timeScale = 1f;
     }
-
-    public void Settings() {
-        FindFirstObjectByType<SettingsMenuManager>().OpenUp();
-        childMenuOpen = true;
-        Debug.Log("RTYU");
+    public void Pause()
+    {
+        GamePause.active = true;
+        SettingsMenu.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        menu.SetActive(true);
+        Time.timeScale = 0f;
     }
+}
 
-    public void MainMenu() {
-        LoadingMenuManager.inst.LoadScene("Main");
-        Debug.Log("MIAN");
-    }
+public static class GamePause
+{
+    public static bool active { get; set; } = false;
 }

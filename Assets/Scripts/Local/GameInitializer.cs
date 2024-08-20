@@ -1,14 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameInitializer : MonoBehaviour
 {
+    public static bool loadedAlwaysActive = false;
     void Start() {
-        SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
-        SceneManager.LoadScene("SettingsMenu", LoadSceneMode.Additive);
-        SceneManager.LoadScene("Loading", LoadSceneMode.Additive);
+        if (!loadedAlwaysActive)
+        {
+            SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
+            SceneManager.LoadScene("SettingsMenu", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Loading", LoadSceneMode.Additive);
+            loadedAlwaysActive = true;
+        }
     }
 
     public void StartGame() {
@@ -20,6 +24,10 @@ public class GameInitializer : MonoBehaviour
     }
 
     public void QuitApplication() {
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }

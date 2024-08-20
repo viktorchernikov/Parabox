@@ -70,7 +70,7 @@ public sealed class PlayerGroundMotor : PlayerMotor
 
     public override void OnFixedUpdate(float deltaTime)
     {
-        if (PauseMenuManager.inst.showMenu) return;
+        if (GamePause.active) return;
 
         base.OnFixedUpdate(deltaTime);
 
@@ -83,7 +83,7 @@ public sealed class PlayerGroundMotor : PlayerMotor
 
     public override void OnUpdate(float deltaTime)
     {
-        if (PauseMenuManager.inst.showMenu) return;
+        if (GamePause.active) return;
         
         UpdateTakenFromMovent();
     }

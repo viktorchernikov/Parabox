@@ -14,6 +14,7 @@ public class LoadingMenuManager : MonoBehaviour
     public TMP_Text loading;
     public TMP_Text percentage;
     public float fadingTime = 1.25f;
+    public bool isBusy = false;
 
     public static LoadingMenuManager inst;
 
@@ -26,7 +27,6 @@ public class LoadingMenuManager : MonoBehaviour
         DontDestroyOnLoad(canvas);
     }
 
-    bool isBusy = false;
     public void LoadScene(string name) {
         if (isBusy) return;
 
@@ -42,12 +42,13 @@ public class LoadingMenuManager : MonoBehaviour
         float timePassed = 0f;
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(name);
+        Debug.Log(operation != null);
         while (!operation.isDone) {
-            yield return null;
             timePassed += Time.deltaTime;
             loading.text = "Loading" + (timePassed > 1f ? ".." : (timePassed > 0.5f ? "." : "..."));
             percentage.text = $"[{operation.progress * 100}%]";
             if (timePassed >= 1.5f) timePassed = 0f;
+            yield return null;
         }
 
         yield return Fade(false);

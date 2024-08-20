@@ -33,7 +33,7 @@ public class PlayerCameraController : PlayerModule
     }
     public override void OnLateUpdate(float deltaTime)
     {
-        if (PauseMenuManager.inst.showMenu) return;
+        if (GamePause.active) return;
 
         if (!canLook)
         {

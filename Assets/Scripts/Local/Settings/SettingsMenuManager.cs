@@ -63,7 +63,6 @@ public class SettingsMenuManager : MonoBehaviour
     }
 
 
-    bool showMenu = false;
     CursorLockMode prev;
 
     void Start() {
@@ -72,27 +71,23 @@ public class SettingsMenuManager : MonoBehaviour
     }
 
     public void OpenUp() {
-        showMenu = true;
+        SettingsMenu.visible = true;
     }
 
     public void Close() {
-        showMenu = false;
+        SettingsMenu.visible = false;
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape) && showMenu) showMenu = false;
-
-        menu.SetActive(showMenu);
-        if (showMenu) {
-            prev = Cursor.lockState;
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else {
-            Cursor.lockState = prev;
-        }
+        menu.SetActive(SettingsMenu.visible);
     }
 
     public bool IsShown() {
-        return showMenu;
+        return SettingsMenu.visible;
     }
+}
+
+public static class SettingsMenu
+{
+    public static bool visible { get; set; } = false;
 }
