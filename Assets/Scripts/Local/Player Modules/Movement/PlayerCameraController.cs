@@ -33,6 +33,8 @@ public class PlayerCameraController : PlayerModule
     }
     public override void OnLateUpdate(float deltaTime)
     {
+        if (PauseMenuManager.inst.showMenu) return;
+
         if (!canLook)
         {
             viewAngles = parent.usedCamera.viewAngles;

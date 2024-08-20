@@ -71,9 +71,16 @@ public class SettingsMenuManager : MonoBehaviour
         DontDestroyOnLoad(menu);
     }
 
+    public void OpenUp() {
+        showMenu = true;
+    }
+
+    public void Close() {
+        showMenu = false;
+    }
+
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) showMenu = !showMenu;
-        else return;
+        if (Input.GetKeyDown(KeyCode.Escape) && showMenu) showMenu = false;
 
         menu.SetActive(showMenu);
         if (showMenu) {
@@ -83,5 +90,9 @@ public class SettingsMenuManager : MonoBehaviour
         else {
             Cursor.lockState = prev;
         }
+    }
+
+    public bool IsShown() {
+        return showMenu;
     }
 }
