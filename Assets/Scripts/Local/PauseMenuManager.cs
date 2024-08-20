@@ -45,12 +45,16 @@ public class PauseMenuManager : MonoBehaviour
             if (showMenu) {
                 prev = Cursor.lockState;
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                Debug.Log("showmenu");
             }
             else {
                 Cursor.lockState = prev;
+                Cursor.visible = false;
             }
         }
 
+        Debug.Log(Cursor.lockState);
         oldShowMenu = showMenu;
     }
 
@@ -59,14 +63,17 @@ public class PauseMenuManager : MonoBehaviour
     public void Resume() {
         CloseDown();
         FindFirstObjectByType<SettingsMenuManager>().Close();
+        Debug.Log("Resume");
     }
 
     public void Settings() {
         FindFirstObjectByType<SettingsMenuManager>().OpenUp();
         childMenuOpen = true;
+        Debug.Log("RTYU");
     }
 
     public void MainMenu() {
         LoadingMenuManager.inst.LoadScene("Main");
+        Debug.Log("MIAN");
     }
 }
