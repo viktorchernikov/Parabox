@@ -1,31 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Conveyor : MonoBehaviour
 {
     [Header("State")]
-    public List<Rigidbody> affectedRigidbodies = new List<Rigidbody>();
+    public List<Rigidbody> zonedRigidbodies = new List<Rigidbody>();
+    public List<Rigidbody> collidedRigidbodies = new List<Rigidbody>();
     public bool Activated = false;
     public bool direction = true;
     public float lerpDirection = 0f;
     public Vector3 beltForward => transform.forward;
     [Header("Settings")]
     public float maxSpeed = 5f;
-    public float accelerationForce = 30f;
     public float directionChangeSpeed = 0.5f;
     public MeshRenderer[] beltParts;
 
 
-    void FixedUpdate() 
+    void FixedUpdate()
     {
-        foreach(var rigidbody in affectedRigidbodies)
+        lerpDirection = Mathf.Lerp(lerpDirection, Activated ? (direction ? 1 : -1) : 0, directionChangeSpeed * Time.fixedDeltaTime);
+        if (!Activated) return;
+        foreach (var rigidbody in zonedRigidbodies)
         {
-            if (!Activated) return;
+            if (!collidedRigidbodies.Contains(rigidbody)) continue;
             float inDir = Vector3.Dot(beltForward * lerpDirection, rigidbody.velocity);
-            if (inDir < maxSpeed) rigidbody.AddForce(beltForward * accelerationForce * lerpDirection);
+            if (inDir < maxSpeed) rigidbody.AddForce(beltForward * lerpDirection, ForceMode.VelocityChange);
         }
-        lerpDirection = Mathf.Lerp(lerpDirection, direction ? 1 : -1, directionChangeSpeed * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -35,9 +38,9 @@ public class Conveyor : MonoBehaviour
 
         Rigidbody rigidbody = collider.attachedRigidbody;
 
-        if (affectedRigidbodies.Contains(rigidbody)) return;
+        if (zonedRigidbodies.Contains(rigidbody)) return;
 
-        affectedRigidbodies.Add(rigidbody);
+        zonedRigidbodies.Add(rigidbody);
     }
     void OnTriggerExit(Collider collider)
     {
@@ -46,9 +49,25 @@ public class Conveyor : MonoBehaviour
 
         Rigidbody rigidbody = collider.attachedRigidbody;
 
-        if (!affectedRigidbodies.Contains(rigidbody)) return;
+        if (!zonedRigidbodies.Contains(rigidbody)) return;
 
-        affectedRigidbodies.Remove(rigidbody);
+        if (collidedRigidbodies.Contains(rigidbody)) zonedRigidbodies.Remove(rigidbody);
+        zonedRigidbodies.Remove(rigidbody);
+    }
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision == null) return;
+        
+        Collider collider = collision.collider;
+        if (!collider) return;
+
+        Rigidbody rigidbody = collider.attachedRigidbody;
+        if (!rigidbody) return;
+
+        if (collidedRigidbodies.Contains(rigidbody)) return;
+        if (!zonedRigidbodies.Contains(rigidbody)) return;
+
+        collidedRigidbodies.Add(rigidbody);
     }
 
     public void ChangeDirection() {
@@ -57,7 +76,7 @@ public class Conveyor : MonoBehaviour
 
     public void SetDirection(bool dir) {
         if (dir != direction) {
-            affectedRigidbodies.Clear();
+            zonedRigidbodies.Clear();
         }
 
         direction = dir;

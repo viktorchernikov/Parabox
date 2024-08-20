@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6927826196085887841}
   - component: {fileID: 2289588138301235898}
   - component: {fileID: 1568752562321897896}
+  - component: {fileID: 6688595408858940494}
   m_Layer: 0
   m_Name: Conveyor 1x8
   m_TagString: Untagged
@@ -53,8 +54,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8, y: 0.14587927, z: 7.75}
-  m_Center: {x: 0, y: 0.7423291, z: -0.008494794}
+  m_Size: {x: 0.550707, y: 0.9114995, z: 7.92}
+  m_Center: {x: -0.008014262, y: 1.1251392, z: -0.008494854}
 --- !u!114 &1568752562321897896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,15 +68,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e5194087e5b2643b88dc04529ac1c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedRigidbodies: []
+  zonedRigidbodies: []
+  collidedRigidbodies: []
   Activated: 0
   direction: 1
   lerpDirection: 0
   maxSpeed: 1.75
-  accelerationForce: 30
-  directionChangeSpeed: 1
+  directionChangeSpeed: 0.2
   beltParts:
   - {fileID: 3531220847599069901}
+--- !u!65 &6688595408858940494
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741482789683857883}
+  m_Material: {fileID: 13400000, guid: e62342107a0b29f45ad0299cfca70764, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.67, y: 0.03, z: 7.57}
+  m_Center: {x: -0.008014262, y: 0.675, z: -0.008494854}
 --- !u!1001 &2211565402934586840
 PrefabInstance:
   m_ObjectHideFlags: 0
