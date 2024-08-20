@@ -48,8 +48,9 @@ public sealed class PlayerGroundMotor : PlayerMotor
     AudioSource audioSource;
 
     [Header("Footstep Sounds")]
-    public AudioClip[] walkSounds;
-    public AudioClip[] sprintSounds;
+    public AudioClip[] defaultSounds;
+    public AudioClip[] metalSounds;
+    public AudioClip[] woodSounds;
     public float walkFootstepInterval;
     public float sprintFootstepInterval;
     public float VolumeOfFootstep = 0.7f;
@@ -260,7 +261,20 @@ public sealed class PlayerGroundMotor : PlayerMotor
 
     private void PlayRandomFootstepSound()
     {
-        AudioClip[] footstepSoundsArray = moveSpeed == sprintSpeed ? sprintSounds : walkSounds;
+        AudioClip[] footstepSoundsArray;
+
+        if (parent.floorMaterial == FloorMaterial.Metal)
+        {
+            footstepSoundsArray = metalSounds;
+        }
+        else if (parent.floorMaterial == FloorMaterial.Wood)
+        {
+            footstepSoundsArray = woodSounds;
+        }
+        else
+        {
+            footstepSoundsArray  = defaultSounds;
+        }
 
         if (footstepSoundsArray != null && footstepSoundsArray.Length > 0 && audiocanplay)
         {

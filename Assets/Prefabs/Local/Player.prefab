@@ -544,6 +544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveType: 0
   canMove: 1
+  grounded: 0
   walkSpeed: 3
   sprintSpeed: 3
   groundDrag: 6
@@ -589,17 +590,23 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1
-  grounded: 0
   speedofplayul: 0.3
   audiocanplay: 1
-  walkSounds:
-  - {fileID: 8300000, guid: 97854f7fd6756894f8e6e2b0ac2e45ee, type: 3}
-  - {fileID: 8300000, guid: 5f85add88281a6447adbe0e70c775973, type: 3}
-  - {fileID: 8300000, guid: 42f71ff2fc4c1f04aaa0b42c9a653916, type: 3}
-  sprintSounds:
-  - {fileID: 8300000, guid: 70c9e2d8f8358aa4483d16d322eb14c0, type: 3}
-  - {fileID: 8300000, guid: 5f85add88281a6447adbe0e70c775973, type: 3}
-  - {fileID: 8300000, guid: f490e26bf39ab314cbf0c61e1c1fd878, type: 3}
+  defaultSounds:
+  - {fileID: 8300000, guid: aa5f9a084010e30459aba8a5416d755f, type: 3}
+  - {fileID: 8300000, guid: 4e2ab4d3ea8c72748b5304e89336f6b5, type: 3}
+  - {fileID: 8300000, guid: 0c62248645162334e92536b71395d1f0, type: 3}
+  - {fileID: 8300000, guid: 3230afd8f806fac45a9ce4bd58458667, type: 3}
+  metalSounds:
+  - {fileID: 8300000, guid: f20ebf5e232e8a241b08a2180c21e9ee, type: 3}
+  - {fileID: 8300000, guid: f5059942f31917b4995f1530679daf42, type: 3}
+  - {fileID: 8300000, guid: c0af5573d3561ab47ad63c96b56b9f83, type: 3}
+  - {fileID: 8300000, guid: fd0b3f4661097404aa35abcd83effabc, type: 3}
+  woodSounds:
+  - {fileID: 8300000, guid: 963006be451e2cd4bbbf6bfff24fc8b3, type: 3}
+  - {fileID: 8300000, guid: fbce3093b6e51d548b929855dff00201, type: 3}
+  - {fileID: 8300000, guid: 79ed8efed6065ff4c866f2e41b4e4034, type: 3}
+  - {fileID: 8300000, guid: db720605e6090264bbcc0149dbb32f4c, type: 3}
   walkFootstepInterval: 0.5
   sprintFootstepInterval: 0.3
   VolumeOfFootstep: 0.4

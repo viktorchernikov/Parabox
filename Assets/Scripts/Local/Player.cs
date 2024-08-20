@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
 {
+    public FloorMaterial floorMaterial { get; set; } = FloorMaterial.Default;
     [Header("OnStart")]
     public float initialScale = 1f;
     #region State
