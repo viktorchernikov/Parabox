@@ -142,13 +142,16 @@ public sealed class PlayerGroundMotor : PlayerMotor
                 audioSource.PlayOneShot(landingSound);
             }
         }
-        IPickupable pickupable = hit.collider.GetComponent<IPickupable>();
-        if (pickupable != null)
+        if (hit.collider)
         {
-            if (parent.GetModule<PlayerHoldingModule>().currentlyHolding == pickupable)
+            IPickupable pickupable = hit.collider.GetComponent<IPickupable>();
+            if (pickupable != null)
             {
-                parent.GetModule<PlayerHoldingModule>().Drop();
+                if (parent.GetModule<PlayerHoldingModule>().currentlyHolding == pickupable)
+                {
+                    parent.GetModule<PlayerHoldingModule>().Drop();
 
+                }
             }
         }
 
