@@ -19,6 +19,7 @@ public class DrawingPin : StandardPickupable, IPin
         rb.position = pos;
         transform.eulerAngles = -corkBoardDir;
         currentBoardDir = corkBoardDir;
+        Debug.Log(corkBoardDir);
     }
 
     public void Detach() {

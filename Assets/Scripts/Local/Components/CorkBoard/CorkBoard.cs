@@ -15,7 +15,7 @@ public class CorkBoard : MonoBehaviour
             pickupable.self.GetComponent<Collider>().enabled = false;
             Physics.Raycast(new Ray(collider.transform.position, -transform.forward), out RaycastHit hit, 1f);
             pickupable.self.GetComponent<Collider>().enabled = true;
-            pin.Attach(transform.forward, hit.point);
+            pin.Attach(Vector3.up, hit.point);
             pickupable.DropItself();
         }
         else if (Attached[pin] == PinState.JustDetached) {
