@@ -132,7 +132,8 @@ public sealed class PlayerGroundMotor : PlayerMotor
         Vector3 origin = transform.position;
         origin += Vector3.up * groundCheckOffset;
 
-        bool newGrounded = Physics.Raycast(origin, Vector3.down, groundCheckDistance * parent.currentScale, whatIsGround);
+        RaycastHit hit;
+        bool newGrounded = Physics.Raycast(origin, Vector3.down, out hit, groundCheckDistance * parent.currentScale, whatIsGround);
         if (!grounded && newGrounded)
         {
             if (Time.time - lastLandingTime > 0.3f)
@@ -141,6 +142,16 @@ public sealed class PlayerGroundMotor : PlayerMotor
                 audioSource.PlayOneShot(landingSound);
             }
         }
+        IPickupable pickupable = hit.collider.GetComponent<IPickupable>();
+        if (pickupable != null)
+        {
+            if (parent.GetModule<PlayerHoldingModule>().currentlyHolding == pickupable)
+            {
+                parent.GetModule<PlayerHoldingModule>().Drop();
+
+            }
+        }
+
         grounded = newGrounded;
     }
 

@@ -60,4 +60,14 @@ public abstract class StandardPickupable : MonoBehaviour, IInteractable, IPickup
 
         (holdedBy as Player).GetModule<PlayerHoldingModule>().Drop();
     }
+    void FixedUpdate()
+    {
+        if (holdedBy == null) return;
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb.velocity.magnitude < 5) return;
+
+        Player player = holdedBy as Player;
+        player.GetModule<PlayerHoldingModule>().Drop();
+    }
 }

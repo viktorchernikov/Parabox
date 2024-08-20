@@ -35,6 +35,11 @@ public class PlayerCinematicController : PlayerModule
 
         yield return null;
 
+        audioSource.Stop();
+        audioSource.time = 0;
+        audioSource.clip = openingCinematic.audio;
+        audioSource.Play();
+
 
         Transform camera_anchor = sequence.transform.GetChild(0).GetChild(0);
         float time = 0f;

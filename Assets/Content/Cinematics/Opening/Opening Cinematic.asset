@@ -16,4 +16,4 @@ MonoBehaviour:
   sequence: {fileID: 8062635286038613412, guid: 4a3082053b961444188f03726eb360b0,
     type: 3}
   cameraStartViewAngles: {x: 0, y: 0, z: 0}
-  audio: {fileID: 0}
+  audio: {fileID: 8300000, guid: a76cf63a80359f648918c1617cd24b84, type: 3}

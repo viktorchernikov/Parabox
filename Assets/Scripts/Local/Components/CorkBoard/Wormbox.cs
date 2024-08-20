@@ -53,6 +53,7 @@ public class Wormbox : MonoBehaviour, IInteractable
         isBusy = true;
         linkedBox.isBusy = true;
 
+        player.GetModule<PlayerHoldingModule>().Drop();
         PlayerCinematicController playerCinematicController = player.GetModule<PlayerCinematicController>();
 
         playerCinematicController.onWormholeTeleport += ChangeScale;
