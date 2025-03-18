@@ -6,7 +6,7 @@ QualitySettings:
   serializedVersion: 5
   m_CurrentQuality: 0
   m_QualitySettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     name: High Fidelity
     pixelLightCount: 0
     shadows: 2
@@ -28,8 +28,11 @@ QualitySettings:
     realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 1
     useLegacyDetailDistribution: 1
+    adaptiveVsync: 0
     vSyncCount: 0
     realtimeGICPUUsage: 50
+    adaptiveVsyncExtraA: 0
+    adaptiveVsyncExtraB: 0
     lodBias: 1
     maximumLODLevel: 0
     enableLODCrossFade: 1
@@ -44,7 +47,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 36dd385e759c96147b6463dcd1149c11,
+    customRenderPipeline: {fileID: 11400000, guid: 5303e5b9f316a034eb57492595b88f87,
       type: 2}
     terrainQualityOverrides: 0
     terrainPixelError: 1
