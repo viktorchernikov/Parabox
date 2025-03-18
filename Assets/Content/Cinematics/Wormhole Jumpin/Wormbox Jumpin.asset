@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049363d596c25964c82f983a2cbc077a, type: 3}
+  m_Name: Wormbox Jumpin
+  m_EditorClassIdentifier: 
+  duration: 2.6
+  sequence: {fileID: 5099978915083717064, guid: 3e01b7cb7e3de20449cb886467fb212b,
+    type: 3}
+  cameraStartViewAngles: {x: 10, y: 0, z: 0}
+  audio: {fileID: 8300000, guid: 6dad0e2deba0605448f4e9ed9396189a, type: 3}
