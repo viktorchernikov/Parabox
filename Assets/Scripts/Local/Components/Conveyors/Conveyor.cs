@@ -26,7 +26,7 @@ public class Conveyor : MonoBehaviour
         foreach (var rigidbody in zonedRigidbodies)
         {
             if (!collidedRigidbodies.Contains(rigidbody)) continue;
-            float inDir = Vector3.Dot(beltForward * lerpDirection, rigidbody.velocity);
+            float inDir = Vector3.Dot(beltForward * lerpDirection, rigidbody.linearVelocity);
             if (inDir < maxSpeed) rigidbody.AddForce(beltForward * lerpDirection, ForceMode.VelocityChange);
         }
     }

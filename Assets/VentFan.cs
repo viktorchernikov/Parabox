@@ -23,12 +23,12 @@ public class VentFan : MonoBehaviour
 
         Rigidbody rb = collider.attachedRigidbody;
 
-        float inDir = Vector3.Dot(transform.forward, rb.velocity);
+        float inDir = Vector3.Dot(transform.forward, rb.linearVelocity);
         if (inDir < maxSpeed) {
             rb.AddForce(transform.forward * 100f);
         }
         else if (inDir > maxSpeed) {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
+            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
         }
     }
 

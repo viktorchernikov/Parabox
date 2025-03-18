@@ -65,7 +65,7 @@ public abstract class StandardPickupable : MonoBehaviour, IInteractable, IPickup
         if (holdedBy == null) return;
 
         Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb.velocity.magnitude < 10) return;
+        if (rb.linearVelocity.magnitude < 10) return;
 
         Player player = holdedBy as Player;
         player.GetModule<PlayerHoldingModule>().Drop();

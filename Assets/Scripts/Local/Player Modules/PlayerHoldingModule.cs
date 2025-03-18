@@ -40,8 +40,8 @@ public class PlayerHoldingModule : PlayerModule
 
         Rigidbody rb = currentlyHolding.self.GetComponent<Rigidbody>();
         Vector3 targetPos = parent.usedCamera.position + parent.usedCamera.forward * currentlyHolding.holdingDistance;
-        rb.AddForce(-rb.velocity * 0.9f);
-        rb.velocity = (targetPos - currentlyHolding.self.position) * pullingForce;
+        rb.AddForce(-rb.linearVelocity * 0.9f);
+        rb.linearVelocity = (targetPos - currentlyHolding.self.position) * pullingForce;
     }
 
     public void Drop() {

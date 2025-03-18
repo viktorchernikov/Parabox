@@ -104,7 +104,7 @@ public sealed class PlayerGroundMotor : PlayerMotor
 
         if (grounded)
         {
-            rb.drag = groundDrag;
+            rb.linearDamping = groundDrag;
 
             footstepTimer -= Time.deltaTime;
 
@@ -116,7 +116,7 @@ public sealed class PlayerGroundMotor : PlayerMotor
         }
         else
         {
-            rb.drag = 0;
+            rb.linearDamping = 0;
         }
     }
 
@@ -248,18 +248,18 @@ public sealed class PlayerGroundMotor : PlayerMotor
 
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         if (flatVel.magnitude > moveSpeed * parent.currentScale)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed * parent.currentScale;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
 
     private void Jump()
     {
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(transform.up * jumpForce * parent.currentScale, ForceMode.Impulse);
 
         parent.GetModule<PlayerHoldingModule>().Drop();

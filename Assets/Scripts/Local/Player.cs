@@ -105,7 +105,7 @@ public sealed class Player : MonoBehaviour, IInteractor, IEnvironmentEntity
         if (isDuringCinematic)
         {
             usedRigidbody.isKinematic = true;
-            usedRigidbody.velocity = Vector3.zero;
+            usedRigidbody.linearVelocity = Vector3.zero;
 
             GetModule<PlayerGroundMotor>().canMove = false;
             GetModule<PlayerCameraController>().canLook = false;
